@@ -1,7 +1,7 @@
 package ru.otus.homework.dao;
 
-import ru.otus.homework.domain.Test;
+import ru.otus.homework.domain.PersonTest;
 
 public interface TestDao {
-    Test getTest();
+    PersonTest getTest(CommunicationDao communicationDao);
 }

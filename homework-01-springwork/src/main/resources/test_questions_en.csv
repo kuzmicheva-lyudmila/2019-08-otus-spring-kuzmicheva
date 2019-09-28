@@ -1,0 +1,6 @@
+ID;QUESTION;ANSWER;VARIANT1;VARIANT2;VARIANT3;VARIANT4
+1;What is the first program that programmers usually write?;1;1 Hello world;2 Сортировку «пузырьком»;3 Для взлома аккаунта «ВКонтакте». Такая программа есть у каждого программиста;4 Это вопрос с подвохом. Начинают они с починки утюгов, программы тут не при чём.
+2;Does it happen that a program was compiled the first time and without errors?;2;1 Да, конечно;2 Нет, это фантастика;;
+3;Imagine a hypothetical situation in which the program still compiled the first time. What will you do?;3;1 Выключу комп и спокойно пойду спать — дело сделано;2 Порадуюсь за себя и продолжу писать код;3 Буду искать ошибку в компиляторе, где-то она должна быть;
+4;Suppose you are writing a project, and the customer approved a document that clearly states what he wants to get as a result. Will the requirements change during the work on the project?;1;1 Изменятся, конечно;2 Не изменятся. Вы же сами сказали, что всё чётко зафиксировано;;
+5;What is the correct answer to the question about recursion?;3;1 Да;2 42;3 Какой правильный ответ на вопрос про рекурсию?;

@@ -1,12 +1,20 @@
 package ru.otus.homework.domain;
 
 public class Answer {
-    private int numberOfVariant;
+    private String variantOfAnswer;
     private Boolean resultOfAnswer;
 
-    Answer (int numberOfVariant, Boolean resultOfAnswer) {
-         this.numberOfVariant = numberOfVariant;
+    public Answer (String variantOfAnswer, Boolean resultOfAnswer) {
+         this.variantOfAnswer = variantOfAnswer;
          this.resultOfAnswer = resultOfAnswer;
+    }
+
+    public String getVariantOfAnswer() {
+        return variantOfAnswer;
+    }
+
+    public Boolean getResultOfAnswer() {
+        return resultOfAnswer;
     }
 }
 
