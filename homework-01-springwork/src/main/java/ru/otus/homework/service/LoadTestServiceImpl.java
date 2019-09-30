@@ -8,15 +8,13 @@ import ru.otus.homework.domain.PersonTest;
 @Service
 public class LoadTestServiceImpl implements LoadTestService{
     private final TestDao testDao;
-    private final CommunicationDao communicationDao;
 
-    public LoadTestServiceImpl(TestDao testDao, CommunicationDao communicationDao) {
+    public LoadTestServiceImpl(TestDao testDao) {
         this.testDao = testDao;
-        this.communicationDao = communicationDao;
     }
 
     @Override
-    public PersonTest getTest() {
+    public PersonTest getTest(CommunicationDao communicationDao) {
         return testDao.getTest(communicationDao);
     }
 }

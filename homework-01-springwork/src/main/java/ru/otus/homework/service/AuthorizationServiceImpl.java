@@ -8,15 +8,13 @@ import ru.otus.homework.domain.Person;
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService{
     private final PersonDao personDao;
-    private final CommunicationDao communicationDao;
 
-    public AuthorizationServiceImpl(PersonDao personDao, CommunicationDao communicationDao) {
+    public AuthorizationServiceImpl(PersonDao personDao) {
         this.personDao = personDao;
-        this.communicationDao = communicationDao;
     }
 
     @Override
-    public Person getPerson() {
+    public Person getPerson(CommunicationDao communicationDao) {
         return personDao.getPerson(communicationDao);
     }
 }

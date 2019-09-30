@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 import ru.otus.homework.domain.Question;
@@ -19,17 +20,9 @@ public class CommunicationDaoImpl implements CommunicationDao {
     private final Locale locale;
     private MessageSource messageSource;
 
-    public CommunicationDaoImpl(@Value("${locale.language}") String localeLanguage) {
+    public CommunicationDaoImpl(@Value("${locale.language}") String localeLanguage, MessageSource messageSource) {
         this.locale = Locale.forLanguageTag(localeLanguage);
-        this.messageSource = messageSource();
-    }
-
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource ms
-                = new ReloadableResourceBundleMessageSource();
-        ms.setBasename("bundle");
-        ms.setDefaultEncoding("CP1251");
-        return ms;
+        this.messageSource = messageSource;
     }
 
     @Override

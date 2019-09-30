@@ -1,8 +1,8 @@
 package ru.otus.homework.domain;
 
 public class Answer {
-    private String variantOfAnswer;
-    private Boolean resultOfAnswer;
+    private final String variantOfAnswer;
+    private final Boolean resultOfAnswer;
 
     public Answer (String variantOfAnswer, Boolean resultOfAnswer) {
          this.variantOfAnswer = variantOfAnswer;
