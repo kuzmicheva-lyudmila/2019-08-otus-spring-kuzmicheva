@@ -3,7 +3,6 @@ package ru.otus.homework.service;
 import org.springframework.stereotype.Service;
 import ru.otus.homework.dao.CommunicationDao;
 import ru.otus.homework.dao.PersonAnswerDao;
-import ru.otus.homework.dao.PersonDao;
 import ru.otus.homework.domain.Person;
 import ru.otus.homework.domain.PersonAnswer;
 import ru.otus.homework.domain.PersonTest;

@@ -4,24 +4,26 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import ru.otus.homework.MainConfig;
 import ru.otus.homework.domain.Question;
 
-import java.io.*;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.*;
 
-@Service
+@Component
 public class CommunicationDaoImpl implements CommunicationDao {
     private static Logger logger = LoggerFactory.getLogger(CommunicationDaoImpl.class);
     private final Locale locale;
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    public CommunicationDaoImpl(@Value("${locale.language}") String localeLanguage, MessageSource messageSource) {
-        this.locale = Locale.forLanguageTag(localeLanguage);
+    @Autowired
+    public CommunicationDaoImpl(MainConfig mainConfig, MessageSource messageSource) {
+        this.locale = Locale.forLanguageTag(mainConfig.getLocaleLanguage());
         this.messageSource = messageSource;
     }
 
