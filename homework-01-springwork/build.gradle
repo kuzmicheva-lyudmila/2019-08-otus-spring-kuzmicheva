@@ -21,7 +21,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter'
     compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.7'
-    compile "ch.qos.logback:logback-classic:1.2.3"
+    compile 'ch.qos.logback:logback-classic:1.2.3'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
