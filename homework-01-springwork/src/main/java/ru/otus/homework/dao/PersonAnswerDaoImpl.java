@@ -1,7 +1,7 @@
 package ru.otus.homework.dao;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import ru.otus.homework.MainConfig;
 import ru.otus.homework.domain.*;
 
 import java.util.HashMap;
@@ -11,8 +11,8 @@ import java.util.Map;
 public class PersonAnswerDaoImpl implements PersonAnswerDao {
     private final int percentSuccessfulAnswer;
 
-    public PersonAnswerDaoImpl(@Value("${percent.successfulAnswers}") int percentSuccessfulAnswer) {
-        this.percentSuccessfulAnswer = percentSuccessfulAnswer;
+    public PersonAnswerDaoImpl(MainConfig mainConfig) {
+        this.percentSuccessfulAnswer = mainConfig.getPercentSuccessfulAnswer();
     }
 
     @Override

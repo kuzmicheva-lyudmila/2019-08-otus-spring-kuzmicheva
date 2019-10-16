@@ -3,7 +3,6 @@ package ru.otus.homework.service;
 import org.springframework.stereotype.Service;
 import ru.otus.homework.dao.CommunicationDao;
 import ru.otus.homework.dao.PersonAnswerDao;
-import ru.otus.homework.dao.PersonDao;
 import ru.otus.homework.domain.Person;
 import ru.otus.homework.domain.PersonAnswer;
 import ru.otus.homework.domain.PersonTest;
@@ -17,8 +16,8 @@ public class TestServiceImpl implements TestService {
 
     public TestServiceImpl(CommunicationDao communicationDao, PersonAnswerDao personAnswerDao, AuthorizationService authorizationService, LoadTestService loadTestService) {
         this.communicationDao = communicationDao;
-        this.person = authorizationService.getPerson(communicationDao);
-        this.test = loadTestService.getTest(communicationDao);
+        this.person = authorizationService.getPerson(this.communicationDao);
+        this.test = loadTestService.getTest(this.communicationDao);
         this.personAnswerDao = personAnswerDao;
     }
 

@@ -1,4 +1,6 @@
 plugins {
+    id 'org.springframework.boot' version '2.1.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
 }
 
@@ -16,25 +18,21 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.1'
-
-    // https://mvnrepository.com/artifact/org.springframework/spring-context
-    compile group: 'org.springframework', name: 'spring-context', version: '5.1.9.RELEASE'
-
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile group: 'org.springframework', name: 'spring-context'
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.7'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
 
-    compile "ch.qos.logback:logback-classic:1.2.3"
-
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
+    testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.5.2'
 
-    // https://mvnrepository.com/artifact/org.assertj/assertj-core
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
 
-    // https://mvnrepository.com/artifact/org.mockito/mockito-core
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.0.0'
+    testCompile group: 'org.assertj', name: 'assertj-core'
+    testCompile group: 'org.mockito', name: 'mockito-core'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+
+    compile group: 'org.projectlombok', name: 'lombok'
 }
-
-

@@ -1,9 +1,9 @@
 package ru.otus.homework.dao;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.otus.homework.domain.Question;
+import ru.otus.homework.MainConfig;
 import ru.otus.homework.domain.PersonTest;
+import ru.otus.homework.domain.Question;
 
 import java.util.Map;
 
@@ -15,10 +15,10 @@ public class TestDaoImpl implements TestDao{
     private final int countQuestions;
     private final int countAnswerVariants;
 
-    public TestDaoImpl(@Value("${test.filename}") String fileName, @Value("${count.answers}") int countQuestions, @Value("${count.variants}") int countAnswerVariants) {
-        this.fileName = fileName;
-        this.countQuestions = countQuestions;
-        this.countAnswerVariants = countAnswerVariants;
+    public TestDaoImpl(MainConfig mainConfig) {
+        this.fileName = mainConfig.getFileName();
+        this.countQuestions = mainConfig.getCountQuestions();
+        this.countAnswerVariants = mainConfig.getCountAnswerVariants();
     }
 
     @Override
