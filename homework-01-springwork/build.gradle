@@ -35,4 +35,7 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 
     compile group: 'org.projectlombok', name: 'lombok'
+
+    compile group: 'org.springframework.shell', name: 'spring-shell-starter', version: '2.0.1.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.9.RELEASE'
 }
