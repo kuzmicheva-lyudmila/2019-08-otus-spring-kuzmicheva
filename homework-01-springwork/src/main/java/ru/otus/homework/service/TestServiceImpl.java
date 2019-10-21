@@ -9,21 +9,19 @@ import ru.otus.homework.domain.PersonTest;
 
 @Service
 public class TestServiceImpl implements TestService {
-    private final Person person;
-    private final PersonTest test;
     private final PersonAnswerDao personAnswerDao;
-    private final CommunicationDao communicationDao;
 
-    public TestServiceImpl(CommunicationDao communicationDao, PersonAnswerDao personAnswerDao, AuthorizationService authorizationService, LoadTestService loadTestService) {
-        this.communicationDao = communicationDao;
-        this.person = authorizationService.getPerson(this.communicationDao);
-        this.test = loadTestService.getTest(this.communicationDao);
+    public TestServiceImpl(PersonAnswerDao personAnswerDao) {
         this.personAnswerDao = personAnswerDao;
     }
 
     @Override
-    public void runTest() {
-        PersonAnswer personAnswer = personAnswerDao.getPersonAnswer(person, test, communicationDao);
+    public PersonAnswer runTest(Person person, PersonTest test, CommunicationDao communicationDao) {
+        return personAnswerDao.getPersonAnswer(person, test, communicationDao);
+    }
+
+    @Override
+    public void getResultTest(PersonAnswer personAnswer, CommunicationDao communicationDao) {
         personAnswerDao.getResultTest(personAnswer, communicationDao);
     }
 }

@@ -1,7 +1,7 @@
 package ru.otus.homework.dao;
 
 import org.springframework.stereotype.Service;
-import ru.otus.homework.MainConfig;
+import ru.otus.homework.service.MainConfig;
 import ru.otus.homework.domain.*;
 
 import java.util.HashMap;

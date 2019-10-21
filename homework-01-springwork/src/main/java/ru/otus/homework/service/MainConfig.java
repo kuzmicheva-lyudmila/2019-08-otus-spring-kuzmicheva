@@ -1,4 +1,4 @@
-package ru.otus.homework;
+package ru.otus.homework.service;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
