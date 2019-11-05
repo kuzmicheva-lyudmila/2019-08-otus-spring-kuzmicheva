@@ -105,7 +105,7 @@ public class BookInfoDaoJdbc implements BookInfoDao{
         @Override
         public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
             BookGenre bookGenre = new BookGenre(rs.getLong("genre_id"), rs.getString("genre"));
-            List<Author> authorList = authorDao.collectingAuthors(rs.getString("authorNames"), 0);
+            List<Author> authorList = authorDao.getExistingAuthorsByList(rs.getString("authorNames"));
             long id = rs.getLong("id");
             String bookName = rs.getString("book_name");
             String description = rs.getString("description");

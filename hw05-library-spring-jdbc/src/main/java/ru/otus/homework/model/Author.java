@@ -30,4 +30,9 @@ public class Author {
         Author author = (Author) o;
         return Objects.equals(fullName, author.fullName);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName);
+    }
 }

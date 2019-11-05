@@ -9,14 +9,6 @@ public class BookGenre extends CommunicationDaoModel{
     private final long id;
     private final String genre;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookGenre bookGenre = (BookGenre) o;
-        return genre.equals(bookGenre.genre);
-    }
-
     public String show() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Book {");
@@ -28,7 +20,6 @@ public class BookGenre extends CommunicationDaoModel{
         return stringBuilder.toString();
     }
 
-    @Override
     public boolean equalsByString(String parameter) {
         return genre.equals(parameter);
     }

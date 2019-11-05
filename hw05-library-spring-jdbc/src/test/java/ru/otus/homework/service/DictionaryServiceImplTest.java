@@ -54,10 +54,10 @@ class DictionaryServiceImplTest {
     @Test
     void getAuthorsByFullname() {
         List<Author> authorList = Collections.singletonList(new Author(1, FULLNAME_OF_AUTHOR, Strings.EMPTY));
-        when(authorDao.collectingAuthors(eq(FULLNAME_OF_AUTHOR), anyInt())).thenReturn(authorList);
+        when(authorDao.getExistingAuthorsByList(eq(FULLNAME_OF_AUTHOR))).thenReturn(authorList);
 
         assertThat(dictionaryService.getAuthorsByFullname(FULLNAME_OF_AUTHOR)).isEqualTo(authorList);
-        verify(authorDao, times(1)).collectingAuthors(any(), anyInt());
+        verify(authorDao, times(1)).getExistingAuthorsByList(any());
     }
 
     @Test

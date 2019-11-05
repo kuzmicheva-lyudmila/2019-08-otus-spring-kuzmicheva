@@ -6,6 +6,7 @@ import ru.otus.homework.dao.GenreDao;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.BookGenre;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,7 +22,8 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public List<Author> getAuthorsByFullname(String authors) {
-        return authorDao.collectingAuthors(authors, 1);
+        authorDao.insertNewAuthorsByList(authors);
+        return authorDao.getExistingAuthorsByList(authors);
     }
 
     @Override

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface AuthorDao {
     List<Author> getAll();
-    List<Author> collectingAuthors(String authors, int withInsert);
+    List<Author> getExistingAuthorsByList(String authors);
+    List<Author> insertNewAuthorsByList(String authors);
 }

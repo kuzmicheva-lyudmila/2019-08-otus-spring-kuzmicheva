@@ -23,8 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AuthorDaoJdbcTest {
 
     private static final int EXPECTED_AUTHORS_COUNT = 2;
-    private static final Object COLLECTING_AUTHORS_EXPECTED_COUNT_WITHOUT_INSERT = 2;
-    private static final Object COLLECTING_AUTHORS_EXPECTED_COUNT_WITH_INSERT = 3;
+    private static final Object COLLECTING_AUTHORS_EXPECTED_COUNT = 2;
+    private static final Object INSERTING_AUTHORS_EXPECTED_COUNT = 1;
 
     @Autowired
     private AuthorDaoJdbc authorDaoJdbc;
@@ -36,8 +36,12 @@ class AuthorDaoJdbcTest {
     }
 
     @Test
-    void collectingAuthors() {
-        assertThat(authorDaoJdbc.collectingAuthors("author1;author2;author3", 0).size()).isEqualTo(COLLECTING_AUTHORS_EXPECTED_COUNT_WITHOUT_INSERT);
-        assertThat(authorDaoJdbc.collectingAuthors("author1;author2;author3", 1).size()).isEqualTo(COLLECTING_AUTHORS_EXPECTED_COUNT_WITH_INSERT);
+    void getExistingAuthorsByList() {
+        assertThat(authorDaoJdbc.getExistingAuthorsByList("author1;author2;author3").size()).isEqualTo(COLLECTING_AUTHORS_EXPECTED_COUNT);
+    }
+
+    @Test
+    void insertNewAuthorsByList() {
+        assertThat(authorDaoJdbc.insertNewAuthorsByList("author1;author2;author3").size()).isEqualTo(INSERTING_AUTHORS_EXPECTED_COUNT);
     }
 }
