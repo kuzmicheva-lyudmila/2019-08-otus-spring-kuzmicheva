@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    schema: test-schema.sql
+    data: test-data.sql
