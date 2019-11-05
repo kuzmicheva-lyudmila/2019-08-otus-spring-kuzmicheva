@@ -8,7 +8,7 @@ test {
     useJUnitPlatform()
 }
 
-group 'ru.otus.homework'
+group '2019-08-otus-spring-kuzmicheva'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
