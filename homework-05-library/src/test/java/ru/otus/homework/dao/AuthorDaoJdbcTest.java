@@ -24,7 +24,6 @@ class AuthorDaoJdbcTest {
 
     private static final int EXPECTED_AUTHORS_COUNT = 2;
     private static final Object COLLECTING_AUTHORS_EXPECTED_COUNT = 2;
-    private static final Object INSERTING_AUTHORS_EXPECTED_COUNT = 1;
 
     @Autowired
     private AuthorDaoJdbc authorDaoJdbc;
@@ -42,6 +41,6 @@ class AuthorDaoJdbcTest {
 
     @Test
     void insertNewAuthorsByList() {
-        assertThat(authorDaoJdbc.insertNewAuthorsByList("author1;author2;author3").size()).isEqualTo(INSERTING_AUTHORS_EXPECTED_COUNT);
+        assertThat(authorDaoJdbc.insertNewAuthor("author3")).isGreaterThan(0);
     }
 }

@@ -6,8 +6,10 @@ import ru.otus.homework.dao.GenreDao;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.BookGenre;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DictionaryServiceImpl implements DictionaryService {
@@ -22,8 +24,24 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public List<Author> getAuthorsByFullname(String authors) {
-        authorDao.insertNewAuthorsByList(authors);
-        return authorDao.getExistingAuthorsByList(authors);
+        List<Author> existedAuthors = authorDao.getExistingAuthorsByList(authors);
+        boolean isInserted = false;
+
+        for (String fullname : authors.split(";")) {
+            Author comparisonAuthor = new Author(-1, fullname, "");
+            Optional<Author> author = existedAuthors.stream()
+                    .filter(e -> e.equals(comparisonAuthor))
+                    .findAny();
+
+            if (!author.isPresent()) {
+                long id = authorDao.insertNewAuthor(fullname);
+                if (id > 0 && !isInserted) {
+                    isInserted = true;
+                }
+            }
+        }
+
+        return (isInserted) ? authorDao.getExistingAuthorsByList(authors) : existedAuthors;
     }
 
     @Override

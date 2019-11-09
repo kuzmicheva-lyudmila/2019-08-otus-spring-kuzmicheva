@@ -57,7 +57,7 @@ class DictionaryServiceImplTest {
         when(authorDao.getExistingAuthorsByList(eq(FULLNAME_OF_AUTHOR))).thenReturn(authorList);
 
         assertThat(dictionaryService.getAuthorsByFullname(FULLNAME_OF_AUTHOR)).isEqualTo(authorList);
-        verify(authorDao, times(1)).getExistingAuthorsByList(any());
+        verify(authorDao, times(1)).getExistingAuthorsByList(anyString());
     }
 
     @Test
