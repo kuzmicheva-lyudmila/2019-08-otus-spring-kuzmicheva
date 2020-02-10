@@ -6,8 +6,6 @@ import ru.otus.homework.service.BookInfoService;
 import ru.otus.homework.service.CommunicationService;
 import ru.otus.homework.service.DictionaryService;
 
-import java.util.List;
-
 @ShellComponent
 public class ShellMainCommand {
     private final BookInfoService bookInfoService;

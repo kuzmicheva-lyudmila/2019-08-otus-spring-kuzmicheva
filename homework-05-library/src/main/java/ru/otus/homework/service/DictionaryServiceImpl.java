@@ -6,8 +6,6 @@ import ru.otus.homework.dao.GenreDao;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.BookGenre;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

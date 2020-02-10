@@ -1,7 +1,6 @@
 package ru.otus.homework.dao;
 
 import org.springframework.stereotype.Component;
-import ru.otus.homework.model.BookGenre;
 import ru.otus.homework.model.CommunicationDaoModel;
 
 import java.util.List;
