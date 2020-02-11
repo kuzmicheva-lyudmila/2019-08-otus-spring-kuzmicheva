@@ -24,6 +24,12 @@ create table IF NOT EXISTS library.book_authors (
     author_id integer not null references authors(id)
 );
 
+create table if not exists library.commentary (
+    id serial primary key,
+    book_id integer not null references books(id),
+    description varchar(2000)
+);
+
 insert into library.book_genres (genre) values
     ('romance'),
     ('history'),

@@ -10,15 +10,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "authors")
-public class Author {
+@Table(name = "genres")
+public class Genre extends CommunicationDaoModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    private String genre;
 
-    @Column(name = "description", nullable = true)
-    private String description;
+    public boolean equalsByString(String parameter) {
+        return genre.equals(parameter);
+    }
 }

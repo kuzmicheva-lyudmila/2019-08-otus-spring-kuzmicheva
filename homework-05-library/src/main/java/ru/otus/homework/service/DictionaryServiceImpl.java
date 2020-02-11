@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.homework.dao.AuthorDao;
 import ru.otus.homework.dao.GenreDao;
 import ru.otus.homework.model.Author;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,17 +45,17 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public void showAuthors(CommunicationService communicationService) {
         List<Author> authorList = authorDao.getAll();
-        authorList.stream().forEach(author -> communicationService.showMessage(author.show()));
+        authorList.stream().forEach(author -> communicationService.showMessage(author.toString()));
     }
 
     @Override
-    public List<BookGenre> getBookGenres() {
+    public List<Genre> getBookGenres() {
         return genreDao.getAll();
     }
 
     @Override
     public void showBookGenres(CommunicationService communicationService) {
-        List<BookGenre> bookGenres = genreDao.getAll();
-        bookGenres.stream().forEach(bookGenre -> communicationService.showMessage(bookGenre.show()));
+        List<Genre> genres = genreDao.getAll();
+        genres.stream().forEach(bookGenre -> communicationService.showMessage(bookGenre.toString()));
     }
 }

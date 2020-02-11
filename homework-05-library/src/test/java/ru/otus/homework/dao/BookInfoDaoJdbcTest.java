@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.Book;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
 
 import java.util.Collections;
 
@@ -34,7 +34,7 @@ class BookInfoDaoJdbcTest {
                 -1,
                 "Book_test",
                 Collections.singletonList(new Author(1, "author1", "")),
-                new BookGenre(1, "romance"),
+                new Genre(1, "romance"),
                 "")
         );
 

@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.homework.dao.CommunicationDao;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
 
 import java.util.Collections;
 
@@ -39,10 +39,10 @@ class CommunicationServiceImplTest {
 
     @Test
     void getUserInputStringWithList() {
-        BookGenre bookGenre = new BookGenre(1, EXAMPLE_OF_BOOK_GENRE);
-        when(communicationDao.getUserInputString(eq(EXAMPLE_OF_BOOK_GENRE), any(), anyList())).thenReturn(bookGenre);
+        Genre genre = new Genre(1, EXAMPLE_OF_BOOK_GENRE);
+        when(communicationDao.getUserInputString(eq(EXAMPLE_OF_BOOK_GENRE), any(), anyList())).thenReturn(genre);
 
-        assertThat(communicationService.getUserInputString(EXAMPLE_OF_BOOK_GENRE, Strings.EMPTY, Collections.singletonList(bookGenre))).isEqualTo(bookGenre);
+        assertThat(communicationService.getUserInputString(EXAMPLE_OF_BOOK_GENRE, Strings.EMPTY, Collections.singletonList(genre))).isEqualTo(genre);
         verify(communicationDao, times(1)).getUserInputString(any(), any(), anyList());
     }
 

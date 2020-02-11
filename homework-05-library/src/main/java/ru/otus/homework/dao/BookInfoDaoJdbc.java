@@ -9,7 +9,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.Book;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -104,12 +104,12 @@ public class BookInfoDaoJdbc implements BookInfoDao{
     private class BookMapper implements RowMapper<Book> {
         @Override
         public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
-            BookGenre bookGenre = new BookGenre(rs.getLong("genre_id"), rs.getString("genre"));
+            Genre genre = new Genre(rs.getLong("genre_id"), rs.getString("genre"));
             List<Author> authorList = authorDao.getExistingAuthorsByList(rs.getString("authorNames"));
             long id = rs.getLong("id");
             String bookName = rs.getString("book_name");
             String description = rs.getString("description");
-            return new Book(id, bookName, authorList, bookGenre, description);
+            return new Book(id, bookName, authorList, genre, description);
         }
     }
 }

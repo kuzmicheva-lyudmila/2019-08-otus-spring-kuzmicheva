@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import ru.otus.homework.dao.AuthorDao;
 import ru.otus.homework.dao.GenreDao;
 import ru.otus.homework.model.Author;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
 
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +64,7 @@ class DictionaryServiceImplTest {
 
     @Test
     void getBookGenres() {
-        List<BookGenre> bookGenres = Collections.singletonList(new BookGenre(1, BOOK_GENRE));
+        List<Genre> bookGenres = Collections.singletonList(new Genre(1, BOOK_GENRE));
         when(genreDao.getAll()).thenReturn(bookGenres);
 
         assertThat(dictionaryService.getBookGenres()).isEqualTo(bookGenres);

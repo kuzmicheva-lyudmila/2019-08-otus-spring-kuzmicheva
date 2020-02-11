@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.homework.dao.BookInfoDao;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.Book;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
 
 import java.util.List;
 
@@ -25,14 +25,14 @@ public class BookInfoServiceImpl implements BookInfoService{
         String authors = communicationService.getUserInputString("Введите авторов книги (разделитель ';')", "Некорректный автор! Введите авторов еще раз", "[^.]+");
         List<Author> authorList = dictionaryService.getAuthorsByFullname(authors);
 
-        BookGenre genre = communicationService.getUserInputString("Введите жанр книги", "Некорректный жанр книги! Введите жанр еще раз", dictionaryService.getBookGenres());
+        Genre genre = communicationService.getUserInputString("Введите жанр книги", "Некорректный жанр книги! Введите жанр еще раз", dictionaryService.getBookGenres());
 
         String description = communicationService.getUserInputString("Введите описание книги", "Некорректное описание! Введите описание еще раз", "[^.]+");
 
         String message = null;
         try {
             Book newBook = bookInfoDao.insertBook(new Book(-1, title, authorList, genre, description));
-            message = "inserted: " + newBook.show();
+            message = "inserted: " + newBook.toString();
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -47,7 +47,7 @@ public class BookInfoServiceImpl implements BookInfoService{
         String message = null;
         try {
             Book updatedBook = bookInfoDao.updateTitleBookById(id, title);
-            message = "updated: " + updatedBook.show();
+            message = "updated: " + updatedBook.toString();
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -75,6 +75,6 @@ public class BookInfoServiceImpl implements BookInfoService{
     @Override
     public void getAllBooks(CommunicationService communicationService) {
         List<Book> bookList = bookInfoDao.getAllBooks();
-        bookList.stream().forEach(book -> communicationService.showMessage(book.show()));
+        bookList.stream().forEach(book -> communicationService.showMessage(book.toString()));
     }
 }

@@ -1,7 +1,15 @@
 spring:
  datasource:
-  platform: postgres
   url: jdbc:postgresql://localhost:5432/postgres?currentSchema=library
   username: postgres
   password: postgres
-  driverClassName: org.postgresql.Driver
+
+ jpa:
+  generate-ddl: false
+  hibernate:
+   ddl-auto: update
+  show-sql: true
+
+logging:
+ level:
+  root: error
