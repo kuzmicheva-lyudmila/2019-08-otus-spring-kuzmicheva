@@ -1,22 +1,28 @@
 package ru.otus.homework.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "genres")
 public class BookGenre extends CommunicationDaoModel{
-    private final long id;
-    private final String genre;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public String show() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Book {");
-        stringBuilder.append("id = ");
-        stringBuilder.append(id);
-        stringBuilder.append(", genre = ");
-        stringBuilder.append(genre);
-        stringBuilder.append("}");
-        return stringBuilder.toString();
-    }
+    @Column(name = "genre", nullable = false, unique = true)
+    private String genre;
 
     public boolean equalsByString(String parameter) {
         return genre.equals(parameter);

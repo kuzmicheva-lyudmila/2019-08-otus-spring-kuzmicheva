@@ -32,7 +32,7 @@ public class BookInfoServiceImpl implements BookInfoService{
         String message = null;
         try {
             Book newBook = bookInfoDao.insertBook(new Book(-1, title, authorList, genre, description));
-            message = "inserted: " + newBook.show();
+            message = "inserted: " + newBook.toString();
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -47,7 +47,7 @@ public class BookInfoServiceImpl implements BookInfoService{
         String message = null;
         try {
             Book updatedBook = bookInfoDao.updateTitleBookById(id, title);
-            message = "updated: " + updatedBook.show();
+            message = "updated: " + updatedBook.toString();
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -75,6 +75,6 @@ public class BookInfoServiceImpl implements BookInfoService{
     @Override
     public void getAllBooks(CommunicationService communicationService) {
         List<Book> bookList = bookInfoDao.getAllBooks();
-        bookList.stream().forEach(book -> communicationService.showMessage(book.show()));
+        bookList.stream().forEach(book -> communicationService.showMessage(book.toString()));
     }
 }

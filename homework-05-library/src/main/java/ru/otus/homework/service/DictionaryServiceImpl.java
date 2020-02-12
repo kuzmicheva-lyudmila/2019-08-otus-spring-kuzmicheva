@@ -45,7 +45,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public void showAuthors(CommunicationService communicationService) {
         List<Author> authorList = authorDao.getAll();
-        authorList.stream().forEach(author -> communicationService.showMessage(author.show()));
+        authorList.stream().forEach(author -> communicationService.showMessage(author.toString()));
     }
 
     @Override
@@ -56,6 +56,6 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public void showBookGenres(CommunicationService communicationService) {
         List<BookGenre> bookGenres = genreDao.getAll();
-        bookGenres.stream().forEach(bookGenre -> communicationService.showMessage(bookGenre.show()));
+        bookGenres.stream().forEach(bookGenre -> communicationService.showMessage(bookGenre.toString()));
     }
 }
