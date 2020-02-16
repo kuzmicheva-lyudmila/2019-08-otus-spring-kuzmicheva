@@ -1,9 +1,9 @@
-package ru.otus.homework.dao;
+package ru.otus.homework.repository;
 
 import ru.otus.homework.model.Genre;
 
 import java.util.List;
 
-public interface GenreDao {
+public interface GenreRepositoryJpa {
     List<Genre> getAll();
 }

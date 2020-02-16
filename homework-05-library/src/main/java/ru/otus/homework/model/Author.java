@@ -19,6 +19,10 @@ public class Author {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description")
     private String description;
+
+    public Author(String fullname) {
+        this.fullName = fullname;
+    }
 }

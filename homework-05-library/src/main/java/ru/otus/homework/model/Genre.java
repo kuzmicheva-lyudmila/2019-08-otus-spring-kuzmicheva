@@ -10,12 +10,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "genres")
+@Table(name = "book_genres")
 public class Genre extends CommunicationDaoModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column
     private String genre;
 
     public boolean equalsByString(String parameter) {

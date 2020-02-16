@@ -1,4 +1,4 @@
-package ru.otus.homework.dao;
+package ru.otus.homework.repository;
 
 import org.springframework.stereotype.Component;
 import ru.otus.homework.model.CommunicationDaoModel;

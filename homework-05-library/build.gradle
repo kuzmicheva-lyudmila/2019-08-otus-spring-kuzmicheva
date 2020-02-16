@@ -11,7 +11,7 @@ test {
 group '2019-08-otus-spring-kuzmicheva'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -20,8 +20,10 @@ repositories {
 dependencies {
     compile group: 'org.springframework.shell', name: 'spring-shell-starter', version: '2.0.1.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.4.RELEASE'
-    compile group: 'org.projectlombok', name: 'lombok'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'

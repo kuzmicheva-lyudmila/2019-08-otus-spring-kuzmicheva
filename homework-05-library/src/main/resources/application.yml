@@ -1,15 +1,17 @@
 spring:
  datasource:
-  url: jdbc:postgresql://localhost:5432/postgres?currentSchema=library
+  url: jdbc:postgresql://localhost:5432/usermanagment
   username: postgres
   password: postgres
-
+  driverClassName: org.postgresql.Driver
  jpa:
-  generate-ddl: false
+  database-platform: org.hibernate.dialect.PostgreSQLDialect
   hibernate:
-   ddl-auto: update
+   ddl-auto: none
+  properties:
+   hibernate:
+    temp.use_jdbc_metadata_defaults: false
   show-sql: true
-
 logging:
  level:
-  root: error
+  root: ERROR

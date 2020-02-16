@@ -1,61 +1,41 @@
 package ru.otus.homework.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.homework.dao.AuthorDao;
-import ru.otus.homework.dao.GenreDao;
+import ru.otus.homework.repository.AuthorRepositoryJpa;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.Genre;
+import ru.otus.homework.repository.GenreRepositoryJpa;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DictionaryServiceImpl implements DictionaryService {
 
-    private final AuthorDao authorDao;
-    private final GenreDao genreDao;
+    private final AuthorRepositoryJpa authorRepositoryJpa;
+    private final GenreRepositoryJpa genreRepositoryJpa;
 
-    public DictionaryServiceImpl(AuthorDao authorDao, GenreDao genreDao) {
-        this.authorDao = authorDao;
-        this.genreDao = genreDao;
+    public DictionaryServiceImpl(
+            AuthorRepositoryJpa authorRepositoryJpa,
+            GenreRepositoryJpa genreRepositoryJpa
+    ) {
+        this.authorRepositoryJpa = authorRepositoryJpa;
+        this.genreRepositoryJpa = genreRepositoryJpa;
     }
 
     @Override
-    public List<Author> getAuthorsByFullname(String authors) {
-        List<Author> existedAuthors = authorDao.getExistingAuthorsByList(authors);
-        boolean isInserted = false;
-
-        for (String fullname : authors.split(";")) {
-            Author comparisonAuthor = new Author(-1, fullname, "");
-            Optional<Author> author = existedAuthors.stream()
-                    .filter(e -> e.equals(comparisonAuthor))
-                    .findAny();
-
-            if (!author.isPresent()) {
-                long id = authorDao.insertNewAuthor(fullname);
-                if (id > 0 && !isInserted) {
-                    isInserted = true;
-                }
-            }
-        }
-
-        return (isInserted) ? authorDao.getExistingAuthorsByList(authors) : existedAuthors;
+    public Author getAuthorsByFullname(String author) {
+        return authorRepositoryJpa.getByFullname(author);
     }
 
     @Override
     public void showAuthors(CommunicationService communicationService) {
-        List<Author> authorList = authorDao.getAll();
+        List<Author> authorList = authorRepositoryJpa.getAll();
         authorList.stream().forEach(author -> communicationService.showMessage(author.toString()));
     }
 
     @Override
-    public List<Genre> getBookGenres() {
-        return genreDao.getAll();
-    }
-
-    @Override
     public void showBookGenres(CommunicationService communicationService) {
-        List<Genre> genres = genreDao.getAll();
+        List<Genre> genres = genreRepositoryJpa.getAll();
         genres.stream().forEach(bookGenre -> communicationService.showMessage(bookGenre.toString()));
     }
 }
