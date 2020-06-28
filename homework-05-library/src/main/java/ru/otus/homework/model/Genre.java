@@ -10,19 +10,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "authors")
-public class Author {
+@Table(name = "book_genres")
+public class Genre extends CommunicationDaoModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @Column
+    private String genre;
 
-    @Column(name = "description")
-    private String description;
-
-    public Author(String fullname) {
-        this.fullName = fullname;
+    public boolean equalsByString(String parameter) {
+        return genre.equals(parameter);
     }
 }

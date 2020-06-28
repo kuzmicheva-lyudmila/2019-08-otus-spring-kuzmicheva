@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="homework-05-library" external.linked.project.path="$MODULE_DIR$/../../homework-05-library" external.root.project.path="$MODULE_DIR$/../../homework-05-library" external.system.id="GRADLE" external.system.module.group="2019-08-otus-spring-kuzmicheva" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="2019-08-otus-spring-kuzmicheva" externalSystemModuleVersion="1.0-SNAPSHOT" linkedProjectId="homework-05-library" linkedProjectPath="$MODULE_DIR$/../../homework-05-library" rootProjectPath="$MODULE_DIR$/../../homework-05-library" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../homework-05-library">
+      <excludeFolder url="file://$MODULE_DIR$/../../homework-05-library/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../homework-05-library/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../homework-05-library/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

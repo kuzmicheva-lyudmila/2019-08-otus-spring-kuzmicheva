@@ -10,19 +10,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "authors")
-public class Author {
+@Table(name = "posts")
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @ManyToOne(targetEntity = Book.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
+    private Book book;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
-
-    public Author(String fullname) {
-        this.fullName = fullname;
-    }
 }

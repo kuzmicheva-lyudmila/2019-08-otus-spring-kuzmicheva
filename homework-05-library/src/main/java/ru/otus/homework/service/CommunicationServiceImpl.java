@@ -1,7 +1,7 @@
 package ru.otus.homework.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.homework.dao.CommunicationDao;
+import ru.otus.homework.repository.CommunicationDao;
 import ru.otus.homework.model.CommunicationDaoModel;
 
 import java.util.List;

@@ -19,32 +19,34 @@ public class ShellMainCommand {
     }
 
     @ShellMethod(value = "InsertBook", key = {"insertBook", "ib"})
-    public void insertBook(){
+    public void insertBook() {
         bookInfoService.insertBook(communicationService);
     }
 
     @ShellMethod(value = "UpdateBook", key = {"updateBook", "ub"})
-    public void updateBook(){
+    public void updateBook() {
+
         bookInfoService.updateTitleBookById(communicationService);
     }
 
     @ShellMethod(value = "DeleteBook", key = {"deleteBook", "db"})
-    public void deleteBook(){
+    public void deleteBook() {
         bookInfoService.deleteBookById(communicationService);
     }
 
     @ShellMethod(value = "AllBooks", key = {"showBooks", "sb"})
-    public void showBooks(){
+    public void showBooks() {
         bookInfoService.getAllBooks(communicationService);
     }
 
     @ShellMethod(value = "AllGenres", key = {"showGenres", "sg"})
-    public void getGenres(){
+    public void getGenres() {
         dictionaryService.showBookGenres(communicationService);
     }
 
     @ShellMethod(value = "AllAuthors", key = {"showAuthors", "sa"})
-    public void getAuthors(){
+    public void getAuthors() {
+
         dictionaryService.showAuthors(communicationService);
     }
 }

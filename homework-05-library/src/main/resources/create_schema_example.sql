@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS library;
 
 create table IF NOT EXISTS library.authors (
     id serial Primary Key,
-    fullname varchar(240) not null,
+    full_name varchar(240) not null,
     description varchar(2000)
 );
 
@@ -14,14 +14,20 @@ create table IF NOT EXISTS library.book_genres (
 create table IF NOT EXISTS library.books (
     id serial primary key,
     title varchar(240) not null,
-    genre_id integer not null references book_genres(id),
+    genre_id integer not null references library.book_genres(id),
     description varchar(2000)
 );
 
-create table IF NOT EXISTS library.book_authors (
+create table IF NOT EXISTS library.books_authors (
     id serial primary key,
-    book_id integer not null references books(id),
-    author_id integer not null references authors(id)
+    book_id integer not null references library.books(id),
+    author_id integer not null references library.authors(id)
+);
+
+create table if not exists library.posts (
+    id serial primary key,
+    book_id integer not null references library.books(id),
+    description varchar(2000)
 );
 
 insert into library.book_genres (genre) values

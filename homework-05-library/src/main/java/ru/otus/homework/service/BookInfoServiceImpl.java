@@ -1,38 +1,79 @@
 package ru.otus.homework.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.homework.dao.BookInfoDao;
+import ru.otus.homework.repository.AuthorRepositoryJpa;
+import ru.otus.homework.repository.BookInfoRepositoryJpa;
 import ru.otus.homework.model.Author;
 import ru.otus.homework.model.Book;
-import ru.otus.homework.model.BookGenre;
+import ru.otus.homework.model.Genre;
+import ru.otus.homework.repository.GenreRepositoryJpa;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookInfoServiceImpl implements BookInfoService{
-    private final BookInfoDao bookInfoDao;
-    private final DictionaryService dictionaryService;
+    private final BookInfoRepositoryJpa bookInfoRepositoryJpa;
+    private final AuthorRepositoryJpa authorRepositoryJpa;
+    private final GenreRepositoryJpa genreRepositoryJpa;
 
-    public BookInfoServiceImpl(BookInfoDao bookInfoDao, DictionaryService dictionaryService) {
-        this.bookInfoDao = bookInfoDao;
-        this.dictionaryService = dictionaryService;
+    public BookInfoServiceImpl(
+            BookInfoRepositoryJpa bookInfoRepositoryJpa,
+            AuthorRepositoryJpa authorRepositoryJpa,
+            GenreRepositoryJpa genreRepositoryJpa
+    ) {
+        this.bookInfoRepositoryJpa = bookInfoRepositoryJpa;
+        this.authorRepositoryJpa = authorRepositoryJpa;
+        this.genreRepositoryJpa = genreRepositoryJpa;
     }
 
     @Override
     public void insertBook(CommunicationService communicationService) {
-        String title = communicationService.getUserInputString("Введите наименование книги", "Некорректное наименование! Введите наименование еще раз", "[^.]+");
+        String title = communicationService.getUserInputString(
+                "Введите наименование книги",
+                "Некорректное наименование! Введите наименование еще раз",
+                "[^.]+"
+        );
 
-        String authors = communicationService.getUserInputString("Введите авторов книги (разделитель ';')", "Некорректный автор! Введите авторов еще раз", "[^.]+");
-        List<Author> authorList = dictionaryService.getAuthorsByFullname(authors);
+        String authors = communicationService.getUserInputString(
+                "Введите авторов книги (разделитель ';')",
+                "Некорректный автор! Введите авторов еще раз",
+                "[^.]+"
+        );
 
-        BookGenre genre = communicationService.getUserInputString("Введите жанр книги", "Некорректный жанр книги! Введите жанр еще раз", dictionaryService.getBookGenres());
+        List<Author> authorList = new ArrayList<>();
+        Arrays.stream(authors.split(";"))
+                .forEach(
+                        fullname -> {
+                            Author author = authorRepositoryJpa.getByFullname(fullname);
+                            if (author == null) {
+                                authorList.add(authorRepositoryJpa.save(new Author(fullname)));
+                            } else {
+                                authorList.add(author);
+                            }
+                        }
+                );
 
-        String description = communicationService.getUserInputString("Введите описание книги", "Некорректное описание! Введите описание еще раз", "[^.]+");
+        Genre genre = communicationService.getUserInputString(
+                "Введите жанр книги",
+                "Некорректный жанр книги! Введите жанр еще раз",
+                genreRepositoryJpa.getAll()
+        );
 
-        String message = null;
+        String description = communicationService.getUserInputString(
+                "Введите описание книги",
+                "Некорректное описание! Введите описание еще раз",
+                "[^.]+"
+        );
+
+        String message;
         try {
-            Book newBook = bookInfoDao.insertBook(new Book(-1, title, authorList, genre, description));
-            message = "inserted: " + newBook.show();
+            Book newBook = bookInfoRepositoryJpa.saveBook(
+                    new Book(-1, title, genre, authorList, description)
+            );
+            message = "inserted: " + newBook.toString();
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -41,31 +82,52 @@ public class BookInfoServiceImpl implements BookInfoService{
 
     @Override
     public void updateTitleBookById(CommunicationService communicationService) {
-        long id = Long.parseLong(communicationService.getUserInputString("Введите идентификатор книги", "Некорректный идентификатор! Введите еще раз", "[^d]+"));
-        String title = communicationService.getUserInputString("Введите наименование книги", "Некорректное наименование! Введите еще раз", "[^.]+");
+        long id = Long.parseLong(
+                communicationService.getUserInputString(
+                        "Введите идентификатор книги",
+                        "Некорректный идентификатор! Введите еще раз",
+                        "[^d]+"
+                )
+        );
 
-        String message = null;
+        String title = communicationService.getUserInputString(
+                "Введите наименование книги",
+                "Некорректное наименование! Введите еще раз",
+                "[^.]+"
+        );
+
+        String message;
         try {
-            Book updatedBook = bookInfoDao.updateTitleBookById(id, title);
-            message = "updated: " + updatedBook.show();
+            Optional<Book> updatedBook = bookInfoRepositoryJpa.findById(id);
+            if (updatedBook.isPresent()) {
+                Book book = updatedBook.get();
+                book.setTitle(title);
+                bookInfoRepositoryJpa.saveBook(book);
+                message = "updated book with id = " + book.getId();
+            } else {
+                message = "nothing updated";
+            }
         } catch (Exception e) {
             message = e.getMessage();
         }
+
         communicationService.showMessage(message);
     }
 
     @Override
     public void deleteBookById(CommunicationService communicationService) {
-        long id = Long.parseLong(communicationService.getUserInputString("Введите идентификатор книги", "Некорректный идентификатор! Введите еще раз", "[^d]+"));
+        long id = Long.parseLong(
+                communicationService.getUserInputString(
+                        "Введите идентификатор книги",
+                        "Некорректный идентификатор! Введите еще раз",
+                        "[^d]+"
+                )
+        );
 
-        String message = null;
+        String message;
         try {
-            long deletedBook = bookInfoDao.deleteBookById(id);
-            if (deletedBook > 0) {
-                message = "deleted id = " + id;
-            } else {
-                message = "nothing to delete";
-            }
+            int result = bookInfoRepositoryJpa.deleteById(id);
+            message = (result > 0) ? "deleted success" : "nothing deleted";
         } catch (Exception e) {
             message = e.getMessage();
         }
@@ -74,7 +136,7 @@ public class BookInfoServiceImpl implements BookInfoService{
 
     @Override
     public void getAllBooks(CommunicationService communicationService) {
-        List<Book> bookList = bookInfoDao.getAllBooks();
-        bookList.stream().forEach(book -> communicationService.showMessage(book.show()));
+        List<Book> bookList = bookInfoRepositoryJpa.findAll();
+        bookList.stream().forEach(book -> communicationService.showMessage(book.toString()));
     }
 }
